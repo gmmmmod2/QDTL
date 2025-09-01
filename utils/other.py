@@ -4,20 +4,12 @@ from datetime import datetime
 from transformers import BertModel, PretrainedBartModel
 from typing import Any, Dict, Type, Optional, Union
 
-from models.baseline import BMLP
-from models.compared import BAspect, BGLU, BLSTM, BMultiConv
-from models.new import QTRL
-from models.ResNet import ResNet
+
+from models.QDTL import QDTL
 
 ModelType = Type[torch.nn.Module]
 MODELS_LIST: Dict[str, ModelType] = {
-    'BMLP': BMLP,
-    'QTRL': QTRL,
-    'ResNet': ResNet,
-    'BAspect': BAspect,
-    'BGLU': BGLU,
-    'BLSTM': BLSTM,
-    'BMultiConv': BMultiConv
+    'QTRL': QDTL,
 }
         
 def init_bert(bert: Optional[Union[str, PretrainedBartModel, BertModel]]) -> BertModel:
@@ -162,8 +154,8 @@ def get_model(model_name: str, bert, tokenizer, device: torch.device, params: Di
     if label_embeddings is not None:
         init_args['label_list'] = label_embeddings
     
-    if model_name is 'QTRL':
-        model = QTRL(
+    if model_name is 'QDTL':
+        model = QDTL(
             bert_model=bert,
             tokenizer=tokenizer,
             label_list=label_embeddings,
