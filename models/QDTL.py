@@ -107,7 +107,7 @@ class ProjectMLP(nn.Module):
         bound = 1 / (self.bias.size(1) ** 0.5)
         nn.init.uniform_(self.bias, -bound, bound)
 
-class QTRL(nn.Module):
+class QDTL(nn.Module):
     def __init__(
         self,
         bert_model,
